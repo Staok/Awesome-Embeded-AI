@@ -4,21 +4,48 @@
 
 ------
 
+## 目录
+
+[TOC]
+
+------
+
 ## MCU 端
 
-### K210
+### Kendryte K210
 
-[Github 仓库](https://github.com/Staok/Awesome-K210)
+K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的硬件 IP 核，以及其它常用外设。其可直接跑 kmodel 格式模型，此模型可从 TensorFlow 模型转换为 TFlite 模型、TFLite 模型转换为 K210 的 kmodel 模型 而得到。
 
-收集关于 K210 的 MaixPy 开发和 SDK IDE 开发等的软硬件入门资料，帮助初学者快速了解、学习和入门 K210。
+[Github 仓库](https://github.com/Staok/Awesome-K210)-收集关于 K210 的 MaixPy 开发和 SDK IDE 开发等的软硬件入门资料，帮助初学者快速了解、学习和入门 K210。
 
 这款芯片的生态已经起来了，相关的开发板、kendryte 官方和 sipeed 官方的资料和例程、各路网友大佬的例程、网络训练以及模型开源等等已经非常丰富。甚至[北航高校已经应用部署到无人机产品上](https://github.com/LZBUAV/K210_Python)了，描述如下。
 
->   该项目是Kendryte K210 AI芯片应用程序的集合，其中包括面部检测，颜色检测，目标检测和分类，QR码和Apriltag码检测以及与ArduPilot飞行软件的通信。 最后，我们可以将这些应用程序部署到无人机终端，使无人机更加智能。
+>   该项目是 Kendryte K210 AI芯片应用程序的集合，其中包括面部检测，颜色检测，目标检测和分类，QR码和Apriltag码检测以及与ArduPilot飞行软件的通信。 最后，我们可以将这些应用程序部署到无人机终端，使无人机更加智能。
 >
 >   所实现的应用主要分为两类，第一个是机器视觉应用，该类应用基于openmv机器视觉库；第二类是深度学习应用，该类主要基于Tensorflow和yolov2。详细功能参见用户手册。
 >
 >    本K210项目为Vision_MAV项目的配套项目，Vision_MAV项目旨在设计并实现一个依托深度学习和图像处理技术的基于视觉的微型无人机系统，能够实现在无GPS环境下的自主视觉导航、目标检测与追踪，该项目由北航无人系统研究院李大伟副教授课题组创立并进行研究，并将在项目没有保密需求后进行开源。本仓库的K210项目是Vision_MAV的一个配套项目，基于[嘉楠科技公司](https://canaan-creative.com/)生产的边缘AI芯片[K210](https://canaan-creative.com/product/kendryteai)，来实现目标检测与追踪，为Vision_MAV项目提供一个可选的视觉解决方案。该项目采用了一块[矽速科技公司](https://www.sipeed.com/)生产的MAXI DOCK K210评估板，来验证K210芯片的AI计算能力。在本项目中，采用传统机器视觉方法实现了最大色块识别、二维码识别、Apriltag码识别、圆形识别，采用深度学习方法实现了人脸识别、人体识别、口罩识别等，并开发了K210和[Ardupilot](https://github.com/ArduPilot/ardupilot)飞控固件之间的[MAVlink](https://github.com/ArduPilot/mavlink)通讯接口，来实时的将K210视觉模组解算出的目标位置信息发送给飞控来控制无人机运动。
+
+### ST X-Cube-AI
+
+通过 STM32Cube.AI ，开发人员现在可以将预先训练的神经网络转换为 C 代码，该代码可以调用在 STM32 MCU 上运行的优化库中的函数。这是 ST 公司针对 STM32CubeMX IDE 的一个扩展软件库，下载安装 STM32Cube 后可以在其内下载安装 X-Cube-AI 组件，进而可以进行 神经网络的配置，然后由  STM32CubeMX IDE 产生 STM32 MCU 的 软件开发工程。
+
+特点：
+
+- 从预先训练的神经网络模型生成 STM32 优化的库。
+- 支持各种深度学习框架，如 Keras、TF lite、ONNX、Lasagne、Caffe、ConvNetJS 等。
+- 通过 STM32Cube™ 集成，可轻松在不同 STM32 微控制器系列实现，并生成软件工程。
+- 允许多个人工神经网络在单个STM32 MCU上运行。
+- 完全支持超低功耗STM32 MCU。
+- 免费，用户友好的许可条款。
+
+相关网页：
+
+- [ST 官网 X-Cube-AI 首页 STM32 solutions for Artificial Neural Networks](https://www.st.com/content/st_com/zh/ecosystems/stm32-ann.html#stm32-sann-featuredcontentcontainer)。
+- [ST 官网 X-CUBE-AI 下载页](https://www.st.com/zh/embedded-software/x-cube-ai.html)。推荐不要单独下载，在 STM32CubeMX IDE 中安装组件并直接产生程序工程。
+- [ST 官网 X-CUBE-AI 慕课](https://www.st.com/content/st_com/zh/support/learning/stm32-education/stm32-moocs/Introduction_to_STM32CubeAI_MOOC.html)。
+- [网友教程 STM32CubeMX AI尝尝鲜](https://www.icode9.com/content-4-640741.html)。
+- [网友教程 嵌入式MCU也能跑AI？STM32 Cube.AI工具包使用初探](https://zhuanlan.zhihu.com/p/64353677)。
 
 ### CMSIS-NN
 
@@ -30,13 +57,13 @@ CMSIS (Cortex Microcontroller Software Interface Standard) 是针对 Cortex-M MC
 
 其中这里最关心 CMSIS-NN。
 
-#### 介绍
+**介绍**
 
 Collection of efficient neural network kernels，Neural networks and machine learning are functions that are being pushed into the end node if IoT applications.
 
 The neural network kernels of the [**CMSIS-NN**](https://arm-software.github.io/CMSIS_5/NN/html/index.html) library help to maximize the performance and minimize the memory footprint of neural networks on Cortex-M processor cores. 
 
-#### 提供的函数库
+**提供的函数库**
 
 The library is divided into a number of functions each covering a specific category：
 
@@ -56,7 +83,7 @@ The legacy functions can be identified with their suffix of _q7 or _q15 and are 
 
 The functions supporting TensorFlow Lite framework is identified by the _s8 suffix and can be invoked from TFL micro. The functions are bit exact to TensorFlow Lite. Refer to the TensorFlow's documentation in [3] on how to run a TensorFlow Lite model using optimized CMSIS-NN kernels.
 
-#### 源码、手册和例程
+**源码、手册和例程**
 
 [CMSIS-NN 官方 Github 仓库，包含手册、例程等](https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/NN)；
 
@@ -64,11 +91,11 @@ The functions supporting TensorFlow Lite framework is identified by the _s8 suff
 
 [安富莱的 CMSIS-NN 开源教程和例程（暂时还没出）](http://www.armbbs.cn/forum.php?mod=viewthread&tid=94547)。
 
-#### 总结
+**总结**
 
 这里 CMSIS-NN 是结合 CMSIS DSP库，二者一块完成一些机器学习基本算子函数的库，可以在ARM Cortex M 的 MCU 开发中直接 include 然后调用 API 进行神经网络搭建；还可以使用 CMSIS-NN kernels 来运行 TensorFlow Lite 模型。
 
-####  CMSIS-DSP 的介绍
+**CMSIS-DSP 的介绍**
 
 CMSIS-DSP: Fast implementation of digital signal processing
 
