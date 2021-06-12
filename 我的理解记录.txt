@@ -1,9 +1,0 @@
-CMSIS 5 里面的 NN 是结合 CMSIS DSP库，二者一块完成一些机器学习基本算子函数的库，可以在ARM Cortex M 的 MCU 开发中直接 include 然后调用API进行神经网络搭建
-用 x-cube-ai，则是把 Keras、TF lite、ONNX、Lasagne、Caffe、ConvNetJS等框架训练的神经网络模型转换为内存优化的可在STM32上运行的程序，建议全程从 CubeMX 操作，直接生成工程。
-
-ARM NN 是 使用C++语言，可以直接载入如tensorflow lite框架生成的神经网络模型文件，然后对模型进行分析和优化，使之底层调用适合ARM内核的指令实现运算加速，然后再使用 ARM NN 的 API 载入优化过的模型，进行推理计算，得到结果
-
-PyArmNN 是 ARM NN 的 Python 实现，使用 Python 语言，干的活和 ARM NN 一样。
-
-
-stm32这种 ARM cortex m 的单片机应该用 cmsis nn去复现机器学习代码；而到了ARM cortex A系列的运行 linux 的平台，就使用 ARM NN 这个库，导入tf 或者pytorch的模型，进行优化加速。所以都属于转化，主要还是算法设计。

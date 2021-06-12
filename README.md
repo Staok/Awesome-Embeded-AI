@@ -1,6 +1,6 @@
 # 嵌入式端的神经网络算法部署和实现
 
-介绍关于 ARM NN、CMSIS NN 和 K210 等嵌入式端的 NN 部署和实现。神经网络的调教（训练）还是在 PC 端，神经网络参数训练好之后，在嵌入式端进行部署，使其接收网络给定数据、经过网络计算再给出结果，这么一个过程。
+介绍关于 ARM NN、CMSIS NN 和 K210 等嵌入式端的神经网络算法的部署和实现。神经网络的调教（训练）还是在 PC 端，神经网络参数训练好之后，在嵌入式端进行部署（本文的中心），经过在嵌入式端部署进去的神经网络算法对给定数据进行计算从而得出结果，实现算法的嵌入式端部署和运行，这么一个过程。
 
 ------
 
@@ -10,15 +10,42 @@
 
 ------
 
-## MCU 端
+## 微控制器 MCU 端
+
+### Awesome-Embedded Repository
+
+nhivp/Awesome-Embedded 开源项目下的 Machine Learning & AI on MCU 小节，总结的很好。
+
+[nhivp/Awesome-Embedded: A curated list of awesome embedded programming. (github.com)](https://github.com/nhivp/Awesome-Embedded#machine-learning--ai-on-mcu)，其源文如下：
+
+- [nnom](https://github.com/majianjia/nnom) - A higher-level Neural Network library for microcontrollers.
+- [nn4mp](https://github.com/correlllab/nn4mp)
+- [Embedded Learning Library (ELL)](https://github.com/Microsoft/ELL) - Microsoft's library to deploy intelligent machine-learned models onto resource constrained platforms and small single-board computers.
+- [Qualcomm Neural Processing SDK for AI](https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk) - Libraries to developers run NN models on Snapdragon mobile platforms taking advantage of the CPU, GPU and/or DSP.
+- [CMSIS NN](https://arm-software.github.io/CMSIS_5/NN/html/index.html) - A collection of efficient neural network kernels developed to maximize the performance and minimize the memory footprint of neural networks on Cortex-M processor cores.在后文会介绍到
+- [ARM Compute Library](https://developer.arm.com/technologies/compute-library) - Set of optimized functions for image processing, computer vision, and machine learning.
+- [uTensor](https://github.com/uTensor/uTensor) - AI inference library based on mbed (an RTOS for ARM chipsets) and TensorFlow.
+- [EmbededAI](https://github.com/boralt/EmbeddedAI) - A library that provides elements of AI to C++ applications.
+- [kann](https://github.com/attractivechaos/kann) - A lightweight C library for artificial neural networks
+
+### 网友自实现的轮子
+
+这里只是举例网上有很多开源的网友自己实现的玩具轮子，比如这里介绍的 BP 神经网络，可以直接跑在 MCU 上。
+
+- BP神经网络的C语言实现-只有三层：[BP神经网络及其C语言实现 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/27110594)；
+- 可以运行在STM32的BP算法实现-任意层：[(BP神经网络C语言实现_一朝英雄拔剑起的博客-CSDN博客_bp神经网络c语言实现](https://blog.csdn.net/qq_39545674/article/details/82495569)；
+- [ThreeClassMrWang/c-bpnn: BP神经网络的C语言实现 (github.com)](https://github.com/ThreeClassMrWang/c-bpnn)。
+- etc.
+
+如果链接挂了请告诉我。
 
 ### Kendryte K210
 
 K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的硬件 IP 核，以及其它常用外设。其可直接跑 kmodel 格式模型，此模型可从 TensorFlow 模型转换为 TFlite 模型、TFLite 模型转换为 K210 的 kmodel 模型 而得到。
 
-[Github 仓库](https://github.com/Staok/Awesome-K210)-收集关于 K210 的 MaixPy 开发和 SDK IDE 开发等的软硬件入门资料，帮助初学者快速了解、学习和入门 K210。
+我的[Github 仓库-Awesome-K210](https://github.com/Staok/Awesome-K210)收集了关于 K210 的 MaixPy 开发和 SDK IDE 开发等的软、硬件入门资料，帮助初学者快速了解、学习和入门 K210。
 
-这款芯片的生态已经起来了，相关的开发板、kendryte 官方和 sipeed 官方的资料和例程、各路网友大佬的例程、网络训练以及模型开源等等已经非常丰富。甚至[北航高校已经应用部署到无人机产品上](https://github.com/LZBUAV/K210_Python)了，描述如下。
+这款芯片的生态已经做起来了，相关的开发板、kendryte 官方和 sipeed 官方的资料和例程、各路网友大佬的例程、网络训练以及模型开源等等已经非常丰富。甚至[北航高校已经应用部署到无人机产品上](https://github.com/LZBUAV/K210_Python)了，其项目的描述如下。
 
 >   该项目是 Kendryte K210 AI芯片应用程序的集合，其中包括面部检测，颜色检测，目标检测和分类，QR码和Apriltag码检测以及与ArduPilot飞行软件的通信。 最后，我们可以将这些应用程序部署到无人机终端，使无人机更加智能。
 >
@@ -30,13 +57,15 @@ K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的�
 
 通过 STM32Cube.AI ，开发人员现在可以将预先训练的神经网络转换为 C 代码，该代码可以调用在 STM32 MCU 上运行的优化库中的函数。这是 ST 公司针对 STM32CubeMX IDE 的一个扩展软件库，下载安装 STM32Cube 后可以在其内下载安装 X-Cube-AI 组件，进而可以进行 神经网络的配置，然后由  STM32CubeMX IDE 产生 STM32 MCU 的 软件开发工程。
 
+用 ST X-Cube-AI 是把 Keras、TF lite、ONNX、Lasagne、Caffe、ConvNetJS 等框架训练的神经网络模型转换为 内存优化的、可在 STM32 上运行的程序/数据结构，建议全程在 CubeMX 软件里面操作，直接生成工程。
+
 特点：
 
-- 从预先训练的神经网络模型生成 STM32 优化的库。
-- 支持各种深度学习框架，如 Keras、TF lite、ONNX、Lasagne、Caffe、ConvNetJS 等。
-- 通过 STM32Cube™ 集成，可轻松在不同 STM32 微控制器系列实现，并生成软件工程。
-- 允许多个人工神经网络在单个STM32 MCU上运行。
-- 完全支持超低功耗STM32 MCU。
+- 从预先训练的神经网络模型生成 STM32 优化的库；
+- 支持各种深度学习框架，如 Keras、TF lite、ONNX、Lasagne、Caffe、ConvNetJS 等；
+- 通过 STM32Cube™ 集成，可轻松在不同 STM32 微控制器系列实现，并生成软件工程；
+- 允许多个人工神经网络在单个STM32 MCU上运行；
+- 完全支持超低功耗STM32 MCU；
 - 免费，用户友好的许可条款。
 
 相关网页：
@@ -67,12 +96,12 @@ The neural network kernels of the [**CMSIS-NN**](https://arm-software.github.io/
 
 The library is divided into a number of functions each covering a specific category：
 
--   Convolution Functions
--   Activation Functions
--   Fully-connected Layer Functions
--   Pooling Functions
--   Softmax Functions
--   Basic math Functions
+-   Convolution Functions；
+-   Activation Functions；
+-   Fully-connected Layer Functions；
+-   Pooling Functions；
+-   Softmax Functions；
+-   Basic math Functions。
 
 The functions can be classified into two segments：
 
@@ -85,9 +114,9 @@ The functions supporting TensorFlow Lite framework is identified by the _s8 suff
 
 **源码、手册和例程**
 
-[CMSIS-NN 官方 Github 仓库，包含手册、例程等](https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/NN)；
+[CMSIS-NN 官方 Github 仓库，包含手册、例程等](https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/NN)。
 
-[官方教程集：CMSIS-NN 在 Arm Cortex-M 的应用](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/how-to-guides#cortex-m)；
+[官方教程集：CMSIS-NN 在 Arm Cortex-M 的应用](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/how-to-guides#cortex-m)。
 
 [安富莱的 CMSIS-NN 开源教程和例程（暂时还没出）](http://www.armbbs.cn/forum.php?mod=viewthread&tid=94547)。
 
@@ -109,12 +138,12 @@ Developing a real-time digital signal processing (DSP) system is not trivial as 
 
 ### TinyML Projects
 
-[Tiny Machine Learning 项目主页](https://hanlab.mit.edu/projects/tinyml/)
+[Tiny Machine Learning 项目主页](https://hanlab.mit.edu/projects/tinyml/)。
 
 TinyML Projects 分为两个部分：
 
--   [MCUNet (inference, microcontrollers)](https://hanlab.mit.edu/projects/tinyml/mcunet/)
--   [TinyTL (on-device learning, memory-efficient transfer learning)](https://hanlab.mit.edu/projects/tinyml/tinyTL/)
+-   [MCUNet (inference, microcontrollers)](https://hanlab.mit.edu/projects/tinyml/mcunet/)。
+-   [TinyTL (on-device learning, memory-efficient transfer learning)](https://hanlab.mit.edu/projects/tinyml/tinyTL/)。
 
 论文、PPT、海报和源码等均已开源，商业权被大公司以超超高价买下。
 
@@ -124,54 +153,94 @@ MCUNet 实验结论：
 
 ------
 
-## ARM Cortex-A 端
+## 微处理器 MPU 端
+
+这里的微处理器 MPU 暂指 ARM Cortex-A 内核的。
+
+### ARM Compute Library
+
+[ARM Compute Library 官网介绍主页](https://developer.arm.com/ip-products/processors/machine-learning/compute-library)。
+
+> The Arm Compute Library is a collection of low-level machine learning functions optimized for Cortex-A CPU and Mali GPU architectures. The library provides ML acceleration on Cortex-A CPU through Neon, or SVE and acceleration on Mali GPU through Open CL.
+>
+> Key features：
+>
+> - Over 100 machine learning functions for CPU and GPU
+> - Multiple convolution algorithms (GEMM, Winograd, FFT, and Direct)
+> - Support for multiple data types: FP32, FP16, int8, uint8, BFloat16
+> - Micro-architecture optimization for key ML primitives
+> - Highly configurable build options
+>
+> Supported Architectures/Technologies：
+>
+> - Arm® CPUs:
+>   - Arm® Cortex®-A processor family using Arm® Neon™ technology
+>   - Arm® Cortex®-R processor family with Armv8-R AArch64 architecture using Arm® Neon™ technology
+>   - Arm® Cortex®-X1 processor using Arm® Neon™ technology
+> - Arm® Mali™ GPUs:
+>   - Arm® Mali™-G processor family
+>   - Arm® Mali™-T processor family
+
+基本的，ARM Compute Library 为 ARM Cortex-A 处理器提供了针对性优化的一打的机器学习算法函数，可以使用这些 API 直接构建起神经网络模型，训练或者运行。
+
+> Tutorials:
+>
+> - [Tutorial: Cartoonifying Images on Raspberry Pi with the Compute Library](https://community.arm.com/graphics/b/blog/posts/cartoonifying-images-on-raspberry-pi-with-the-compute-library)
+> - [Tutorial: Running AlexNet on Raspberry Pi with Compute Library](https://community.arm.com/processors/b/blog/posts/running-alexnet-on-raspberry-pi-with-compute-library)
+
+Github 仓库 [ARM-software/ComputeLibrary: The Compute Library is a set of computer vision and machine learning functions optimised for both Arm CPUs and GPUs using SIMD technologies. (github.com)](https://github.com/ARM-software/ComputeLibrary)。
+
+官方手册 [Compute Library: Introduction (arm-software.github.io)](https://arm-software.github.io/ComputeLibrary/latest/)。
 
 ### ARM NN
 
-ARM NN 是 ARM 公司 在 Cortex-A 嵌入式端  "[AI and Machine Learning](https://developer.arm.com/solutions/machine-learning-on-arm)" 主题的 关键项目，官方介绍如下：
+ARM NN 是 [ARM Compute Library](https://github.com/ARM-software/ComputeLibrary) 的高级封装，ARM Compute Library 提供对 ARM Cortex-A 优化的神经网络基本算子，可以使用 ARM Compute Library 的 API 直接自己搭建神经网络算法，或者使用在这里介绍的 ARM NN，转化主流神经网络框架训练好的模型并使用。ARM NN 是 ARM 公司 在 Cortex-A 嵌入式端  "[AI and Machine Learning](https://developer.arm.com/solutions/machine-learning-on-arm)" 主题的 关键项目。
 
->   The machine learning platform libraries – Arm NN and Arm Compute Library – bridge the gap between existing neural network (NN) frameworks, such as TensorFlow, TensorFlow Lite, Caffe and ONNX, and the underlying IP.
->
->   They enable efficient translation of these NN frameworks, allowing them to run efficiently – without modification – across Arm Cortex-A CPUs, Arm Mali GPUs and the Arm ML processor.
->
->   ![ML Platform flow chart image](assets/ml-home-graphic-814-75fde4.webp)
-
-[ARM NN 的 Github 仓库](https://github.com/arm-software/armnn)
+Github 仓库 [ARM-software/armnn: Arm NN ML Software. The code here is a read-only mirror of https://review.mlplatform.org/admin/repos/ml/armnn (github.com)](https://github.com/arm-software/armnn)。
 
 >   The Arm NN SDK is a set of open-source software and tools that enables machine learning workloads on power-efficient devices. It provides a bridge between existing neural network frameworks and power-efficient Cortex-A CPUs, Arm Mali GPUs and Arm Ethos NPUs.
 >
+>   Arm NN SDK utilizes the Compute Library to target programmable cores, such as Cortex-A CPUs and Mali GPUs, as efficiently as possible. 
+>
 >   ![imageARMNN](assets/imageARMNN.png)
 
-ARM NN 是 使用C++语言，可以直接载入如 tensorflow lite 框架生成的神经网络模型文件，然后对模型进行分析和优化，使之底层调用适合 ARM 内核的指令或者 NPU单元 实现运算加速，然后再使用 ARM NN 的 API 载入优化过的模型，进行推理计算，得到结果。
+ARM NN 是 使用C++语言，可以直接载入如 tensorflow lite 框架生成的神经网络模型文件，然后对模型进行分析和优化，使之底层调用适合 ARM 内核的指令或者 NPU 单元 实现运算加速，然后再使用 ARM NN 的 API 载入优化过的模型，进行推理计算，得到结果。
+
+> The machine learning platform libraries – Arm NN and Arm Compute Library – bridge the gap between existing neural network (NN) frameworks, such as TensorFlow, TensorFlow Lite, Caffe and ONNX, and the underlying IP.
+>
+> They enable efficient translation of these NN frameworks, allowing them to run efficiently – without modification – across Arm Cortex-A CPUs, Arm Mali GPUs and the Arm ML processor.
+>
+> ![ML Platform flow chart image](assets/ml-home-graphic-814-75fde4.webp)
 
 官方生态文章和实例：
 
--   [ARM NN 官方的应用文章](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/how-to-guides#armnn)
--   [ARM NN 官方的在树莓派上使用](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/how-to-guides#mlrpi)
--   [ARM 官网 - AI and Machine Learning 白皮书 各种应用介绍](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/white-papers-and-research-papers)
+-   [ARM NN 官方的应用文章](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/how-to-guides#armnn)。
+-   [ARM NN 官方的在树莓派上使用](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/how-to-guides#mlrpi)。
+-   [ARM 官网 - AI and Machine Learning 白皮书 各种应用介绍](https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/white-papers-and-research-papers)。
 
 网友实例：
 
--   [被低估的ArmNN（一）如何编译](https://zhuanlan.zhihu.com/p/71369040)
--   [【树莓派/目标检测】(二)armnn编译](https://blog.csdn.net/qq_33446100/article/details/114024776)
--   看来目前还不是很多
+-   [被低估的ArmNN（一）如何编译](https://zhuanlan.zhihu.com/p/71369040)。
+-   [【树莓派/目标检测】(二)armnn编译](https://blog.csdn.net/qq_33446100/article/details/114024776)。
+-   看来目前还不是很多。
 
 ### PyArmNN
 
-[PyArmNN 的 Github 仓库](https://github.com/NXPmicro/pyarmnn-release)
+[PyArmNN 的 Github 仓库](https://github.com/NXPmicro/pyarmnn-release)。
 
 PyArmNN 是 ARM NN 的 Python 实现，使用 Python 语言，干的活和 ARM NN 一样。
 
 网友实例：
 
--   [Accelerating ML inference on X-Ray detection at edge using Raspberry Pi with PyArmNN](https://community.arm.com/developer/ip-products/processors/b/ml-ip-blog/posts/ml-inference-x-ray-detection-edge-raspberry-pi-pyarmnn)
--   看来目前还不是很多
+-   [Accelerating ML inference on X-Ray detection at edge using Raspberry Pi with PyArmNN](https://community.arm.com/developer/ip-products/processors/b/ml-ip-blog/posts/ml-inference-x-ray-detection-edge-raspberry-pi-pyarmnn)。
+-   看来目前还不是很多。
 
 ## 总结
 
-stm32 这种 ARM Cortex-M 的单片机应该用 CMSIS-NN 去复现（或者运行 TensorFlow Lite）神经网络模型；
+- stm32 这种 ARM Cortex-M 的单片机应该用 CMSIS-NN 去复现（或者运行 TensorFlow Lite）神经网络模型，或者使用 Awesome-Embedded Repository 等小节介绍的轮子；
 
-而到了ARM Cortex-A 系列的运行 Linux 的平台，就使用 ARM NN 这个库，导入 tf 或者 Pytorch 的模型，进行优化加速。
+- 而到了ARM Cortex-A 系列的运行 Linux 的平台，就使用 ARM NN 这个库，导入 tf 或者 Pytorch 的模型，进行优化加速。
+
 
 所以都属于转化，主要还是算法设计。
 
