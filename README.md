@@ -2,6 +2,10 @@
 
 介绍关于 ARM NN、CMSIS NN 和 K210 等嵌入式端的神经网络算法的部署和实现。神经网络的调教（训练）还是在 PC 端，神经网络参数训练好之后，在嵌入式端进行部署（本文的中心），经过在嵌入式端部署进去的神经网络算法对给定数据进行计算从而得出结果，实现算法的嵌入式端部署和运行，这么一个过程。
 
+嵌入式 AI 概念：
+
+![嵌入式AI概念](assets/嵌入式AI概念.png)
+
 ------
 
 ## 目录
@@ -136,6 +140,16 @@ Developing a real-time digital signal processing (DSP) system is not trivial as 
 
 [安富莱的 硬汉嵌入式论坛](http://www.armbbs.cn/)；[安富莱官网](http://www.armfly.com/)；[安富莱的 CMSIS-DSP 开源教程和例程](http://www.armbbs.cn/forum.php?mod=viewthread&tid=94547)；[CMSIS-DSP 官方例子（Github）](https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/DSP/Examples/ARM)。
 
+### TensorFlowLite
+
+TensorFlowLite 可被用于微控制器（MCU）和其它只有千字节内存的设备。（这里有待补充更多信息和官网网页）
+
+特点：
+
+- 不需要操作系统支持，可以移植和 “裸机” 运行在 Cortex-M3\M4 等内核的 MCU 上，20KB ~ 1MB 量级的容量占用。
+- 官方有支持 STM32F746 的 Discover 板等。[适用于微控制器的 TensorFlow Lite (google.cn)](https://tensorflow.google.cn/lite/microcontrollers?hl=zh-cn)。
+- 适合嵌入式开发，代码库小，模块化，入门容易，有移植各平台示例。
+
 ### TinyML Projects
 
 [Tiny Machine Learning 项目主页](https://hanlab.mit.edu/projects/tinyml/)。
@@ -239,7 +253,7 @@ PyArmNN 是 ARM NN 的 Python 实现，使用 Python 语言，干的活和 ARM N
 
 - stm32 这种 ARM Cortex-M 的单片机应该用 CMSIS-NN 去复现（或者运行 TensorFlow Lite）神经网络模型，或者使用 Awesome-Embedded Repository 等小节介绍的轮子；
 
-- 而到了ARM Cortex-A 系列的运行 Linux 的平台，就使用 ARM NN 这个库，导入 tf 或者 Pytorch 的模型，进行优化加速。
+- 而到了ARM Cortex-A 系列的运行 Linux 的平台，就使用 ARM NN 这个库，导入 TF 或者 Pytorch 的模型，进行优化加速。
 
 
 所以都属于转化，主要还是算法设计。
