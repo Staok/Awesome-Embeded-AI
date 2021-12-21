@@ -1,3 +1,5 @@
+有待整理进来 [如何将训练好的神经网络部署到嵌入式芯片上，如arduino和树莓派等？ - 知乎 (zhihu.com)](https://www.zhihu.com/question/382207885/answer/1184193490)
+
 # 嵌入式端的神经网络算法部署和实现
 
 介绍关于 ARM NN、CMSIS NN 和 K210 等嵌入式端的神经网络算法的部署和实现。神经网络的调教（训练）还是在 PC 端，神经网络参数训练好之后，在嵌入式端进行部署（本文的中心），经过在嵌入式端部署进去的神经网络算法对给定数据进行计算从而得出结果，实现算法的嵌入式端部署和运行，这么一个过程。
@@ -77,8 +79,13 @@ K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的�
 - [ST 官网 X-Cube-AI 首页 STM32 solutions for Artificial Neural Networks](https://www.st.com/content/st_com/zh/ecosystems/stm32-ann.html#stm32-sann-featuredcontentcontainer)。
 - [ST 官网 X-CUBE-AI 下载页](https://www.st.com/zh/embedded-software/x-cube-ai.html)。推荐不要单独下载，在 STM32CubeMX IDE 中安装组件并直接产生程序工程。
 - [ST 官网 X-CUBE-AI 慕课](https://www.st.com/content/st_com/zh/support/learning/stm32-education/stm32-moocs/Introduction_to_STM32CubeAI_MOOC.html)。
-- [网友教程 STM32CubeMX AI尝尝鲜](https://www.icode9.com/content-4-640741.html)。
-- [网友教程 嵌入式MCU也能跑AI？STM32 Cube.AI工具包使用初探](https://zhuanlan.zhihu.com/p/64353677)。
+
+网络教程：
+
+- [STM32CubeMX AI尝尝鲜](https://www.icode9.com/content-4-640741.html)。
+- [嵌入式MCU也能跑AI？STM32 Cube.AI工具包使用初探](https://zhuanlan.zhihu.com/p/64353677)。
+- [【嵌入式AI开发】篇四|部署篇：STM32cubeIDE上部署神经网络之模型部署 (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NTY1OTA3Nw==&mid=2247484272&idx=1&sn=4dadc390c97a1552f60ca3fd68007f36&chksm=ce57f2daf9207bcc452735449a996d4ad1d72e006908fe7bc161f2e29b191de79dea5f1f826b&scene=178&cur_album_id=2084907594690674690#rd)。
+- [【嵌入式AI开发】篇五|实战篇一：STM32cubeIDE上部署神经网络之pytorch搭建指纹识别模型.onnx (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NTY1OTA3Nw==&mid=2247484307&idx=1&sn=3cae454a376dc51adc11587f099dd87e&chksm=ce57f239f9207b2f3f5700d975325abefbe342ef0b8b78661c8caf3a34b439ecd853c0203d1f&scene=21#wechat_redirect).
 
 ### CMSIS-NN
 
@@ -151,6 +158,8 @@ TensorFlowLite 可被用于微控制器（MCU）和其它只有千字节内存�
 - 适合嵌入式开发，代码库小，模块化，入门容易，有移植各平台示例。
 
 ### TinyML Projects
+
+网络文章介绍：[【嵌入式AI开发】MCUNet: Tiny Deep Learning on IoT Devices-微型机器学习时代已经到来了 (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NTY1OTA3Nw==&mid=2247484333&idx=1&sn=9313a25db99a3a70402a92386e86ecf3&chksm=ce57f207f9207b11dab79ba7e8dca94a4c9b3d8ec3acc6caa6d32602465c570e1605ee09e34e&scene=178&cur_album_id=2084907594690674690#rd)。
 
 [Tiny Machine Learning 项目主页](https://hanlab.mit.edu/projects/tinyml/)。
 
