@@ -78,6 +78,7 @@ K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的�
 
 - [ST 官网 X-Cube-AI 首页 STM32 solutions for Artificial Neural Networks](https://www.st.com/content/st_com/zh/ecosystems/stm32-ann.html#stm32-sann-featuredcontentcontainer)。
 - [ST 官网 X-CUBE-AI 下载页](https://www.st.com/zh/embedded-software/x-cube-ai.html)。推荐不要单独下载，在 STM32CubeMX IDE 中安装组件并直接产生程序工程。
+- [ST Cude.AI 介绍页 (stmcu.com.cn)](https://www.stmcu.com.cn/ecosystem/app/ai)。
 - [ST 官网 X-CUBE-AI 慕课](https://www.st.com/content/st_com/zh/support/learning/stm32-education/stm32-moocs/Introduction_to_STM32CubeAI_MOOC.html)。
 
 网络教程：
