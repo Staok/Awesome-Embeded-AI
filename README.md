@@ -86,7 +86,8 @@ K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的�
 - [STM32CubeMX AI尝尝鲜](https://www.icode9.com/content-4-640741.html)。
 - [嵌入式MCU也能跑AI？STM32 Cube.AI工具包使用初探](https://zhuanlan.zhihu.com/p/64353677)。
 - [【嵌入式AI开发】篇四|部署篇：STM32cubeIDE上部署神经网络之模型部署 (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NTY1OTA3Nw==&mid=2247484272&idx=1&sn=4dadc390c97a1552f60ca3fd68007f36&chksm=ce57f2daf9207bcc452735449a996d4ad1d72e006908fe7bc161f2e29b191de79dea5f1f826b&scene=178&cur_album_id=2084907594690674690#rd)。
-- [【嵌入式AI开发】篇五|实战篇一：STM32cubeIDE上部署神经网络之pytorch搭建指纹识别模型.onnx (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NTY1OTA3Nw==&mid=2247484307&idx=1&sn=3cae454a376dc51adc11587f099dd87e&chksm=ce57f239f9207b2f3f5700d975325abefbe342ef0b8b78661c8caf3a34b439ecd853c0203d1f&scene=21#wechat_redirect).
+- [【嵌入式AI开发】篇五|实战篇一：STM32cubeIDE上部署神经网络之pytorch搭建指纹识别模型.onnx (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NTY1OTA3Nw==&mid=2247484307&idx=1&sn=3cae454a376dc51adc11587f099dd87e&chksm=ce57f239f9207b2f3f5700d975325abefbe342ef0b8b78661c8caf3a34b439ecd853c0203d1f&scene=21#wechat_redirect)。
+- [我在STM32单片机上跑神经网络算法(文章结尾有学习资料和学习群) - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/449335680)。
 
 ### CMSIS-NN
 
