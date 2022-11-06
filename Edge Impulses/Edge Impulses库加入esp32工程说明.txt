@@ -1,0 +1,85 @@
+
+
+默认是支持 esp32 编译的（也就是 ESP-EYE，而不是 ESP S3 EYE（esp32s3））
+
+官网参考手册 https://docs.edgeimpulse.com/docs/deployment/running-your-impulse-locally/running-your-impulse-esp32
+
+直接将官网生成的 cpp 库 中 edge-impulse-sdk、model-parameters 和 tflite-model 三个文件夹 放入 工程文件夹即可
+
+然后进入工程目录用
+idf.py set-target esp32
+idf.py menuconfig
+idf.py build
+可以编译
+
+清理
+idf.py clean
+idf.py fullclean
+
+
+要用 esp32s3 编译，
+	编译失败 后 查到 工程内 \edge-impulse-sdk\portin\ei_classifier_porting.h 里面  EI_PORTING_ESPRESSIF 宏会关闭导致 ei_sleep()、ei_printf() 没有定义了
+	所以设置 这个宏 始终为 1 ，然后可以成功编译
+即
+idf.py set-target esp32s3
+idf.py build
+
+
+要将 edge-impulse 库作为一个文件夹放到 工程目录里面，则直接将官网生成的 cpp 库 压缩包直接作为一个文件夹全都解压到里面，包括里面三个文件夹和CMakeLists.txt
+	然后改 main\CMakeLists.txt，假设 edge-impulse 库 文件夹名字为 shose-v2，则里面都改一下相关路径即可，
+	main\CMakeLists.txt 完整内容如下：
+
+cmake_minimum_required(VERSION 3.13.1)
+
+set(MODEL_FOLDER ../shose-v2/)
+set(EI_SDK_FOLDER ../shose-v2/edge-impulse-sdk)
+
+if(NOT CMAKE_BUILD_EARLY_EXPANSION)
+add_definitions(-DEI_CLASSIFIER_TFLITE_ENABLE_ESP_NN=1) # enables ESP-NN optimizations by Espressif
+endif()
+
+OPTION(DEFINE_DEBUG
+    "Build the project using debugging code"
+    OFF)
+IF(DEFINE_DEBUG)
+    MESSAGE("Adding Debug flag...")
+    ADD_DEFINITIONS(-DDEBUG)
+    SET(CMAKE_BUILD_TYPE Debug)
+    MESSAGE("Build type is " ${CMAKE_BUILD_TYPE})
+ENDIF(DEFINE_DEBUG)
+
+set(include_dirs
+    ${MODEL_FOLDER}
+    ${MODEL_FOLDER}/tflite-model
+    ${MODEL_FOLDER}/model-parameters
+    ${EI_SDK_FOLDER}
+    ${EI_SDK_FOLDER}/anomaly
+    ${EI_SDK_FOLDER}/classifier
+    ${EI_SDK_FOLDER}/dsp
+    ${EI_SDK_FOLDER}/porting
+    ${EI_SDK_FOLDER}/tensorflow
+    ${EI_SDK_FOLDER}/third_party
+    ${EI_SDK_FOLDER}/third_party/ruy
+    ${EI_SDK_FOLDER}/third_party/gemmlowp
+    ${EI_SDK_FOLDER}/third_party/flatbuffers/include
+)
+
+include(${EI_SDK_FOLDER}/cmake/utils.cmake)
+
+RECURSIVE_FIND_FILE_EXCLUDE_DIR(SOURCE_FILES "../shose-v2/edge-impulse-sdk" "CMSIS" "*.cpp")
+RECURSIVE_FIND_FILE_EXCLUDE_DIR(MODEL_FILES "../shose-v2/tflite-model" "CMSIS" "*.cpp")
+RECURSIVE_FIND_FILE_EXCLUDE_DIR(CC_FILES "../shose-v2/edge-impulse-sdk" "CMSIS" "*.cc")
+RECURSIVE_FIND_FILE_EXCLUDE_DIR(S_FILES "../shose-v2/edge-impulse-sdk" "CMSIS" "*.s")
+RECURSIVE_FIND_FILE_EXCLUDE_DIR(C_FILES "../shose-v2/edge-impulse-sdk" "CMSIS" "*.c")
+
+list(APPEND SOURCE_FILES ${S_FILES})
+list(APPEND SOURCE_FILES ${C_FILES})
+list(APPEND SOURCE_FILES ${CC_FILES})
+list(APPEND SOURCE_FILES ${MODEL_FILES})
+
+idf_component_register(SRCS "main.cpp" "${SOURCE_FILES}"
+                       INCLUDE_DIRS "${include_dirs}")
+
+target_compile_options(${COMPONENT_LIB} PRIVATE -O3)
+
+

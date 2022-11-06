@@ -65,10 +65,20 @@ K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的�
 
 ### Edge Impulse
 
-可以训练各种传感器数据的机器学习，图像，语音 or others，然后部署到 自己 MCU 上。
+可以在线训练各种传感器数据的神经网络模型，处理 图像，语音 or others，然后部署到 自己 MCU 上。
 
 - 官方文档 [Getting Started - Edge Impulse Documentation](https://docs.edgeimpulse.com/docs) 第一手资料。
 - 导出模型和库 并部署在自己 MCU 上 [C++ library - Edge Impulse Documentation](https://docs.edgeimpulse.com/docs/deployment/running-your-impulse-locally)。
+- API 手册 [Edge Impulse API - Edge Impulse API](https://docs.edgeimpulse.com/reference/edge-impulse-api/edge-impulse-api)。
+
+自己使用的总结，以 ESP32 为例：
+
+1. 提前准备好 ESP32 的 ESP-IDF 编译环境，并且会用，参考 我的相关仓库 [esp8266-esp32-development/ESP-IDF-IDE编程 at master · Staok/esp8266-esp32-development (github.com)](https://github.com/Staok/esp8266-esp32-development/tree/master/ESP-IDF-IDE编程)，Gitee 地址 [ESP-IDF-IDE编程 · 瞰百/esp8266-esp32-development - 码云 - 开源中国 (gitee.com)](https://gitee.com/staok/esp8266-esp32-development/tree/master/ESP-IDF-IDE编程)。
+2. 按照[官网 Getting Started 手册的步骤](https://docs.edgeimpulse.com/docs)，官网注册账户、新建工程、输入数据、构建模型、在线训练、导出 Edge Impulse C++ 库。
+3. 参考 [On your Espressif ESP-EYE (ESP32) development board - Edge Impulse Documentation](https://docs.edgeimpulse.com/docs/deployment/running-your-impulse-locally/running-your-impulse-esp32)，首先做一个最小工程，按照这个链接里面的步骤。
+4. 更多详细参考 本仓库下 `\Edge Impulses` 文件夹内 说明，可以顺利编译 带 Edge Impulse 库的工程。
+
+
 
 一些网友教程：
 
