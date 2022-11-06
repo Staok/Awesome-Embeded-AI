@@ -77,6 +77,7 @@ K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的�
 2. 按照[官网 Getting Started 手册的步骤](https://docs.edgeimpulse.com/docs)，官网注册账户、新建工程、输入数据、构建模型、在线训练、导出 Edge Impulse C++ 库。
 3. 参考 [On your Espressif ESP-EYE (ESP32) development board - Edge Impulse Documentation](https://docs.edgeimpulse.com/docs/deployment/running-your-impulse-locally/running-your-impulse-esp32)，首先做一个最小工程，按照这个链接里面的步骤。
 4. 更多详细参考 本仓库下 `\Edge Impulses` 文件夹内 说明，可以顺利编译 带 Edge Impulse 库的工程。
+4. 一个官方提供的样板工程，可直接编译，[edgeimpulse/firmware-espressif-esp32: Edge Impulse firmware for the Espressif ESP-EYE(ESP32) Development board (github.com)](https://github.com/edgeimpulse/firmware-espressif-esp32)。
 
 
 
