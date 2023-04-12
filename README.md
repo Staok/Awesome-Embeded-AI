@@ -10,6 +10,8 @@
 
 **本文提及的 开源库 和 资料 均放在了 [Github](https://github.com/Staok/Awesome-Embeded-AI)/[Gitee](https://gitee.com/staok/Awesome-Embeded-AI) 仓库内。**
 
+仓库内容较大 约 100MB。
+
 ------
 
 ## 目录
