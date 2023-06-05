@@ -10,8 +10,6 @@
 
 **本文提及的 开源库 和 资料 均放在了 [Github](https://github.com/Staok/Awesome-Embeded-AI)/[Gitee](https://gitee.com/staok/Awesome-Embeded-AI) 仓库内。**
 
-仓库内容较大 约 100MB。
-
 ------
 
 ## 目录
@@ -40,13 +38,16 @@ nhivp/Awesome-Embedded 开源项目下的 Machine Learning & AI on MCU 小节，
 - [EmbededAI](https://github.com/boralt/EmbeddedAI) - A library that provides elements of AI to C++ applications.
 - [kann](https://github.com/attractivechaos/kann) - A lightweight C library for artificial neural networks
 
-### 网友自实现的轮子
+### 网友自实现的轮子 / 算子库
+
+- [uingrd/EmbeddedML: 《AI嵌入式系统——算法优化与实现》软件工具、例程及教学辅助材料 (github.com)](https://github.com/uingrd/EmbeddedML)。
+- .etc
 
 这里只是举例网上有很多开源的网友自己实现的玩具轮子，比如这里介绍的 BP 神经网络，可以直接跑在 MCU 上。
 
-- BP神经网络的C语言实现-只有三层：[BP神经网络及其C语言实现 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/27110594)；
+- BP神经网络的C语言实现-只有三层：[BP神经网络及其C语言实现 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/27110594)；[ThreeClassMrWang/c-bpnn: BP神经网络的C语言实现 (github.com)](https://github.com/ThreeClassMrWang/c-bpnn)。
 - 可以运行在STM32的BP算法实现-任意层：[(BP神经网络C语言实现_一朝英雄拔剑起的博客-CSDN博客_bp神经网络c语言实现](https://blog.csdn.net/qq_39545674/article/details/82495569)；
-- [ThreeClassMrWang/c-bpnn: BP神经网络的C语言实现 (github.com)](https://github.com/ThreeClassMrWang/c-bpnn)。
+- STM32 运行 三层BP：[sertreet/BPNeuralNetwork: STM32F407ZGT6 Run BP Neural Network Handwritten Digit Recognition (github.com)](https://github.com/sertreet/BPNeuralNetwork)。
 - etc.
 
 如果链接挂了请告诉我。
@@ -125,7 +126,9 @@ K210 是 RISC-V 64 位双核处理器，集成了可运行神经网络算法的�
 - [我在STM32单片机上跑神经网络算法(文章结尾有学习资料和学习群) - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/449335680)。
 - [在STM32上部署神经网络实现人体活动识别_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1uK411D79q/)。
 
-### CMSIS-NN
+### CMSIS-NN / IQmath
+
+**CMSIS 下的 CMSIS-NN 与 CMSIS-DSP 库**
 
 CMSIS (Cortex Microcontroller Software Interface Standard) 是针对 Cortex-M MCU 和 Cortex-A5/A7/A9 处理器的一组软件应用框架，是标准化软件组件库，抽离出公共部分组件和启动文件等，简化开发，并提供很多高效的软件实现。下图示意其组成部件。
 
@@ -184,6 +187,12 @@ Developing a real-time digital signal processing (DSP) system is not trivial as 
 关于 CMSIS-DSP 的学习和使用，"安富莱"进行了不少的摸索和验证，并出了几百页的教程，对于初学者足够够的了。
 
 [安富莱的 硬汉嵌入式论坛](http://www.armbbs.cn/)；[安富莱官网](http://www.armfly.com/)；[安富莱的 CMSIS-DSP 开源教程和例程](http://www.armbbs.cn/forum.php?mod=viewthread&tid=94547)；[CMSIS-DSP 官方例子（Github）](https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/DSP/Examples/ARM)。
+
+**TI 的 IQmath 库**
+
+相关资料全网很多，这里暂时不展开了。下面零星放放：
+
+- [TI的32位定点DSP库IQmath在H7和F4上的移植和使用 - STM32H7 - 硬汉嵌入式论坛 - Powered by Discuz! (armbbs.cn)](https://www.armbbs.cn/forum.php?mod=viewthread&tid=94660)。
 
 ### TensorFlowLite
 
@@ -295,6 +304,11 @@ PyArmNN 是 ARM NN 的 Python 实现，使用 Python 语言，干的活和 ARM N
 
 -   [Accelerating ML inference on X-Ray detection at edge using Raspberry Pi with PyArmNN](https://community.arm.com/developer/ip-products/processors/b/ml-ip-blog/posts/ml-inference-x-ray-detection-edge-raspberry-pi-pyarmnn)。
 -   看来目前还不是很多。
+
+### MACE
+
+- [zhy520xp/mace-makefile-project: makefile 交叉编译 libmace.a，并能在嵌入式端调用GPU来跑深度学习模型 (github.com)](https://github.com/zhy520xp/mace-makefile-project).
+- MACE 介绍自搜 [libmace_百度搜索 (baidu.com)](https://www.baidu.com/s?ie=UTF-8&wd=libmace)。
 
 ## 总结
 
